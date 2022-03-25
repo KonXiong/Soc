@@ -1,0 +1,39 @@
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    03/25/2022  10:11:06  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
+D:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\huibian.obj TO .\Objects\huibian PRINT (.\Listings\huibian.m51)
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\huibian.obj (HUIBIAN)
+
+
+LINK MAP OF MODULE:  .\Objects\huibian (HUIBIAN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0007H     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\huibian (HUIBIAN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        HUIBIAN
+  D:00F0H         SYMBOL        B
+  C:0000H         LINE#         10
+  C:0002H         LINE#         11
+  C:0005H         LINE#         12
+  -------         ENDMOD        HUIBIAN
+
+Program Size: data=8.0 xdata=0 code=7
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

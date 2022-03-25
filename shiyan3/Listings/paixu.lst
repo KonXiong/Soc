@@ -1,0 +1,72 @@
+C51 COMPILER V9.59.0.0   PAIXU                                                             03/25/2022 08:16:03 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE PAIXU
+OBJECT MODULE PLACED IN .\Objects\paixu.obj
+COMPILER INVOKED BY: D:\Keil_v5\C51\BIN\C51.EXE paixu.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\pai
+                    -xu.lst) TABS(2) OBJECT(.\Objects\paixu.obj)
+
+line level    source
+
+   1          /*****************************************************************************
+   2          File name: paixu
+   3          Description: 数据排序
+   4          Author: 熊康
+   5          Version: V1.0
+   6          Date: 2022.3.26
+   7          *****************************************************************************/
+   8          #include "stdio.h"
+   9          #include "intrins.h"
+  10          #include "reg51.h"
+  11          unsigned char data sum1 _at_ 0x40;
+  12          unsigned char data sum2 _at_ 0x41;
+  13          unsigned char data ave _at_ 0x50;
+  14          unsigned char data a[10] _at_ 0x30; 
+  15          int i,j,temp;
+  16          
+  17          
+  18          
+  19          
+  20          void main(){
+  21   1        
+  22   1      //数组赋值
+  23   1      for(i=0,j=0x0C;i<10;i++,j--){
+  24   2              a[i]=j;    // 数组从55到45
+  25   2      }
+  26   1        
+  27   1      //冒泡排序
+  28   1      for(i=0; i<10; i++){
+  29   2          for(j=9; j>i; j--){
+  30   3              if(a[j]<a[j-1]){
+  31   4                  temp = a[j];
+  32   4                  a[j] = a[j-1];
+  33   4                  a[j-1] = temp;
+  34   4              }
+  35   3          }
+  36   2      }
+  37   1      
+  38   1      //计算和和平均值
+  39   1      temp = 0;
+  40   1      for(i=1; i<9; i++){
+  41   2          temp = temp + a[i];
+  42   2      }
+  43   1      sum1 = temp / 10;  //80
+  44   1      sum2 = temp % 10;  //1024
+  45   1      ave = temp / 8;
+  46   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    217    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      6    ----
+C51 COMPILER V9.59.0.0   PAIXU                                                             03/25/2022 08:16:03 PAGE 2   
+
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

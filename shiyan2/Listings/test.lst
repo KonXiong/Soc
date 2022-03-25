@@ -1,0 +1,66 @@
+C51 COMPILER V9.59.0.0   TEST                                                              03/25/2022 01:01:10 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE TEST
+OBJECT MODULE PLACED IN .\Objects\test.obj
+COMPILER INVOKED BY: D:\Keil_v5\C51\BIN\C51.EXE test.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\test
+                    -.lst) TABS(2) OBJECT(.\Objects\test.obj)
+
+line level    source
+
+   1          /*****************************************************************************
+   2          File name: Test2
+   3          Description: 学习观察内部RAM和调试程序
+   4          Author: 熊康
+   5          Version: V1.0
+   6          Date: 2022.3.18
+   7          *****************************************************************************/
+   8          #include "stdio.h"
+   9          #include "intrins.h"
+  10          #include "reg51.h"
+  11          
+  12          unsigned char ww0 _at_ 0x30;
+  13          unsigned char ww1 _at_ 0x31;
+  14          unsigned char ww2 _at_ 0x40;
+  15          unsigned char ww3 _at_ 0x41;
+  16          
+  17          unsigned char ee0 _at_ 0x50;
+  18          unsigned char ee1 _at_ 0x51;
+  19          unsigned char ee2 _at_ 0x52;    //变量写入各自的单元中
+  20          
+  21          int k,x;
+  22          
+  23          void main()
+  24          {
+  25   1        //给两个两位数赋值
+  26   1        ww0=0x08;
+  27   1        ww1=0x09;
+  28   1        ww2=0x08;
+  29   1        ww3=0x02;    
+  30   1        
+  31   1        //求出总和
+  32   1        k=10*ww0+ww1+10*ww2+ww3;   
+  33   1        TI=1;
+  34   1        printf("k=%d",k);
+  35   1        TI=0;
+  36   1        
+  37   1        //分别求出百位十位个位的值
+  38   1        ee0=k/100;
+  39   1        x=k%100;
+  40   1        ee1=x/10;
+  41   1        ee2=x%10;    
+  42   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    123    ----
+   CONSTANT SIZE    =      5    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      4    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

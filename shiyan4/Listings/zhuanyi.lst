@@ -1,0 +1,61 @@
+C51 COMPILER V9.59.0.0   ZHUANYI                                                           03/25/2022 09:34:02 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE ZHUANYI
+OBJECT MODULE PLACED IN .\Objects\zhuanyi.obj
+COMPILER INVOKED BY: D:\Keil_v5\C51\BIN\C51.EXE zhuanyi.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\z
+                    -huanyi.lst) TABS(2) OBJECT(.\Objects\zhuanyi.obj)
+
+line level    source
+
+   1          /*****************************************************************************
+   2          File name: zhuanyi
+   3          Description: 数据转移
+   4          Author: 熊康
+   5          Version: V1.0
+   6          Date: 2022.3.25
+   7          *****************************************************************************/
+   8          #include "stdio.h"
+   9          #include "intrins.h"
+  10          #include "reg51.h"
+  11          unsigned char data d[10] _at_ 0x30; //申明变量d，片内数据存储区
+  12          unsigned char xdata x[10] _at_ 0x0200;  //申明变量d，片外数据存储区
+  13          unsigned char code *ptr0;       //申明指向程序存储区的指针变量
+  14          unsigned char xdata *ptr1;      //申明指向外部数据存储区的指针变量
+  15          unsigned char data *temp;
+  16          int i,j;
+  17            
+  18          void main(){
+  19   1        ptr0 = 0x0010;     //指向程序存储区地址为0x0010
+  20   1        ptr1 = 0x0200;     //指向外部数据存储区地址为0x0200
+  21   1        temp = d;
+  22   1        
+  23   1        for(i=0,j=0x20; i<10; i++,j++){
+  24   2          x[i] = i;
+  25   2        }
+  26   1        
+  27   1        //将程序存储器的数据搬运到数据存储区
+  28   1        for(i=0; i<10; ptr0++,i++){
+  29   2          d[i] = *ptr0; 
+  30   2        }
+  31   1        
+  32   1        //将外部数据存储区的数据搬运到内部数据存储区
+  33   1        for(i=0; i<10; ptr1++,i++){
+  34   2          d[i] = *ptr1; 
+  35   2        }
+  36   1        
+  37   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    157    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      9    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

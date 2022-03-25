@@ -1,0 +1,107 @@
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    03/25/2022  08:16:04  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
+D:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\paixu.obj TO .\Objects\paixu PRINT (.\Listings\paixu.m51)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\paixu.obj (PAIXU)
+  D:\KEIL_V5\C51\LIB\C51S.LIB (?C_STARTUP)
+  D:\KEIL_V5\C51\LIB\C51S.LIB (?C?SIDIV)
+  D:\KEIL_V5\C51\LIB\C51S.LIB (?C?UIDIV)
+
+
+LINK MAP OF MODULE:  .\Objects\paixu (PAIXU)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0006H     UNIT         ?DT?PAIXU
+                    000EH     0022H                  *** GAP ***
+            DATA    0030H     000AH     ABSOLUTE     
+                    003AH     0006H                  *** GAP ***
+            DATA    0040H     0001H     ABSOLUTE     
+            DATA    0041H     0001H     ABSOLUTE     
+                    0042H     000EH                  *** GAP ***
+            DATA    0050H     0001H     ABSOLUTE     
+            IDATA   0051H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     00D9H     UNIT         ?PR?MAIN?PAIXU
+            CODE    00DCH     008BH     UNIT         ?C?LIB_CODE
+            CODE    0167H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\paixu (PAIXU)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?PAIXU
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\paixu (PAIXU)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        PAIXU
+  C:0000H         SYMBOL        _ICE_DUMMY_
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  03/25/2022  08:16:04  PAGE 2
+
+
+  D:0040H         PUBLIC        sum1
+  D:0041H         PUBLIC        sum2
+  C:0003H         PUBLIC        main
+  D:0008H         PUBLIC        temp
+  D:0050H         PUBLIC        ave
+  D:0030H         PUBLIC        a
+  D:000AH         PUBLIC        i
+  D:000CH         PUBLIC        j
+  -------         PROC          MAIN
+  C:0003H         LINE#         20
+  C:0003H         LINE#         23
+  C:001AH         LINE#         24
+  C:0021H         LINE#         25
+  C:0033H         LINE#         28
+  C:0038H         LINE#         29
+  C:004FH         LINE#         30
+  C:0061H         LINE#         31
+  C:0067H         LINE#         32
+  C:006FH         LINE#         33
+  C:0075H         LINE#         34
+  C:0075H         LINE#         35
+  C:007FH         LINE#         36
+  C:008DH         LINE#         39
+  C:0092H         LINE#         40
+  C:0097H         LINE#         41
+  C:00A6H         LINE#         42
+  C:00B4H         LINE#         43
+  C:00C1H         LINE#         44
+  C:00CEH         LINE#         45
+  C:00DBH         LINE#         46
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        PAIXU
+
+  -------         MODULE        ?C?SIDIV
+  C:00DCH         PUBLIC        ?C?SIDIV
+  -------         ENDMOD        ?C?SIDIV
+
+  -------         MODULE        ?C?UIDIV
+  C:0112H         PUBLIC        ?C?UIDIV
+  -------         ENDMOD        ?C?UIDIV
+
+Program Size: data=28.0 xdata=0 code=371
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

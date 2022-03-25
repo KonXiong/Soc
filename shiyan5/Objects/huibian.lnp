@@ -1,0 +1,3 @@
+".\Objects\huibian.obj" 
+TO ".\Objects\huibian" 
+PRINT(".\Listings\huibian.m51")

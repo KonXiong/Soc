@@ -1,0 +1,151 @@
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    03/25/2022  00:15:35  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
+D:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\demo.obj TO .\Objects\demo PRINT (.\Listings\demo.m51)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\demo.obj (DEMO)
+  D:\KEIL_V5\C51\LIB\C51S.LIB (?C_STARTUP)
+  D:\KEIL_V5\C51\LIB\C51S.LIB (?C?SIDIV)
+  D:\KEIL_V5\C51\LIB\C51S.LIB (?C?UIDIV)
+
+
+LINK MAP OF MODULE:  .\Objects\demo (DEMO)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0017H     UNIT         ?DT?DEMO
+                    001FH     0001H                  *** GAP ***
+            DATA    0020H     0001H     ABSOLUTE     
+                    0021H     000FH                  *** GAP ***
+            DATA    0030H     0001H     ABSOLUTE     
+            DATA    0031H     0001H     ABSOLUTE     
+            DATA    0032H     0001H     ABSOLUTE     
+            DATA    0033H     0001H     ABSOLUTE     
+            DATA    0034H     0001H     ABSOLUTE     
+                    0035H     000BH                  *** GAP ***
+            DATA    0040H     0001H     ABSOLUTE     
+            DATA    0041H     0001H     ABSOLUTE     
+            DATA    0042H     0001H     ABSOLUTE     
+                    0043H     000DH                  *** GAP ***
+            DATA    0050H     0005H     ABSOLUTE     
+            IDATA   0055H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     00FBH     UNIT         ?PR?MAIN?DEMO
+            CODE    00FEH     008BH     UNIT         ?C?LIB_CODE
+            CODE    0189H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\demo (DEMO)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?DEMO
+
+
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  03/25/2022  00:15:35  PAGE 2
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\demo (DEMO)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        DEMO
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0030H         PUBLIC        ww0
+  D:0031H         PUBLIC        ww1
+  D:0032H         PUBLIC        ww2
+  D:0033H         PUBLIC        ww3
+  D:0034H         PUBLIC        ww4
+  C:0003H         PUBLIC        main
+  B:0020H.0       PUBLIC        BB0
+  B:0020H.1       PUBLIC        BB1
+  B:0020H.2       PUBLIC        BB2
+  D:0008H         PUBLIC        B
+  D:000AH         PUBLIC        ACC
+  D:000CH         PUBLIC        TH0
+  D:000EH         PUBLIC        TL0
+  D:0050H         PUBLIC        a
+  D:0010H         PUBLIC        i
+  D:0012H         PUBLIC        k
+  D:0014H         PUBLIC        xx
+  D:0015H         PUBLIC        yy
+  D:0020H         PUBLIC        BZW
+  D:0017H         PUBLIC        zz
+  D:0019H         PUBLIC        x
+  D:001BH         PUBLIC        y
+  D:001DH         PUBLIC        z
+  D:0040H         PUBLIC        ee0
+  D:0041H         PUBLIC        ee1
+  D:0042H         PUBLIC        ee2
+  -------         PROC          MAIN
+  C:0003H         LINE#         25
+  C:0003H         LINE#         26
+  C:0003H         LINE#         28
+  C:0006H         LINE#         29
+  C:0009H         LINE#         30
+  C:000CH         LINE#         31
+  C:000FH         LINE#         32
+  C:0012H         LINE#         34
+  C:0033H         LINE#         35
+  C:003DH         LINE#         37
+  C:0045H         LINE#         38
+  C:004EH         LINE#         39
+  C:0056H         LINE#         40
+  C:005FH         LINE#         41
+  C:006AH         LINE#         42
+  C:006CH         LINE#         43
+  C:0077H         LINE#         44
+  C:0079H         LINE#         45
+  C:0084H         LINE#         46
+  C:0086H         LINE#         48
+  C:009DH         LINE#         49
+  C:009DH         LINE#         50
+  C:00A4H         LINE#         51
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  03/25/2022  00:15:35  PAGE 3
+
+
+  C:00B6H         LINE#         52
+  C:00BCH         LINE#         53
+  C:00C2H         LINE#         54
+  C:00D4H         LINE#         55
+  C:00D4H         LINE#         56
+  C:00E0H         LINE#         57
+  C:00E2H         LINE#         58
+  C:00E2H         LINE#         59
+  C:00EEH         LINE#         60
+  C:00F0H         LINE#         61
+  C:00F0H         LINE#         62
+  C:00FCH         LINE#         63
+  C:00FCH         LINE#         64
+  C:00FCH         LINE#         65
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        DEMO
+
+  -------         MODULE        ?C?SIDIV
+  C:00FEH         PUBLIC        ?C?SIDIV
+  -------         ENDMOD        ?C?SIDIV
+
+  -------         MODULE        ?C?UIDIV
+  C:0134H         PUBLIC        ?C?UIDIV
+  -------         ENDMOD        ?C?UIDIV
+
+Program Size: data=46.0 xdata=0 code=405
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

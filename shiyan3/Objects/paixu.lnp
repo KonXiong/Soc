@@ -1,0 +1,3 @@
+".\Objects\paixu.obj" 
+TO ".\Objects\paixu" 
+PRINT(".\Listings\paixu.m51")

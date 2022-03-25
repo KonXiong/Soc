@@ -1,0 +1,88 @@
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    03/25/2022  09:34:02  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
+D:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\zhuanyi.obj TO .\Objects\zhuanyi PRINT (.\Listings\zhuanyi.m51)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\zhuanyi.obj (ZHUANYI)
+  D:\KEIL_V5\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  .\Objects\zhuanyi (ZHUANYI)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0009H     UNIT         ?DT?ZHUANYI
+                    0011H     001FH                  *** GAP ***
+            DATA    0030H     000AH     ABSOLUTE     
+            IDATA   003AH     0001H     UNIT         ?STACK
+
+            * * * * * * *  X D A T A   M E M O R Y  * * * * * * *
+                    0000H     0200H                  *** GAP ***
+            XDATA   0200H     000AH     ABSOLUTE     
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     009DH     UNIT         ?PR?MAIN?ZHUANYI
+            CODE    00A0H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\zhuanyi (ZHUANYI)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?ZHUANYI
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\zhuanyi (ZHUANYI)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ZHUANYI
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0008H         PUBLIC        ptr0
+  D:000AH         PUBLIC        ptr1
+  C:0003H         PUBLIC        main
+  D:000CH         PUBLIC        temp
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  03/25/2022  09:34:02  PAGE 2
+
+
+  D:0030H         PUBLIC        d
+  D:000DH         PUBLIC        i
+  D:000FH         PUBLIC        j
+  X:0200H         PUBLIC        x
+  -------         PROC          MAIN
+  C:0003H         LINE#         18
+  C:0003H         LINE#         19
+  C:0009H         LINE#         20
+  C:000FH         LINE#         21
+  C:0012H         LINE#         23
+  C:0029H         LINE#         24
+  C:0038H         LINE#         25
+  C:004AH         LINE#         28
+  C:004FH         LINE#         29
+  C:005FH         LINE#         30
+  C:0075H         LINE#         33
+  C:007AH         LINE#         34
+  C:0089H         LINE#         35
+  C:009FH         LINE#         37
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        ZHUANYI
+
+Program Size: data=28.0 xdata=10 code=172
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

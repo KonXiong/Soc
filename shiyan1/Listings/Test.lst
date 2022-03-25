@@ -1,0 +1,73 @@
+C51 COMPILER V9.59.0.0   TEST                                                              03/25/2022 10:20:54 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE TEST
+OBJECT MODULE PLACED IN .\Objects\Test.obj
+COMPILER INVOKED BY: D:\Keil_v5\C51\BIN\C51.EXE Test.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\Test
+                    -.lst) TABS(2) OBJECT(.\Objects\Test.obj)
+
+line level    source
+
+   1          /***************************************************************************** 
+   2          File name: Test 
+   3          Description: 熟悉C语言编程 
+   4          Author: 熊康 
+   5          Version: V1.0 
+   6          Date: 2022.3.18 
+   7          *****************************************************************************/  
+   8          #include "reg51.h"  
+   9          #include "stdio.h"  
+  10            
+  11          void main(){  
+  12   1          int i=0;  
+  13   1          int a=3,b=6;  
+  14   1          int c=0;  
+  15   1          float s=0;  
+  16   1          while(1)  
+  17   1          {  
+  18   2              //two numbers add  
+  19   2              c=a+b;    
+  20   2              TI=1;   //Open Serial  
+  21   2              printf("c=%d\n",c);  //print to the Serial  
+  22   2              TI=0;  //Close Seiral  
+  23   2              P1=i;  //Open Port 1  
+  24   2        
+  25   2              //Conpare get the smaller  
+  26   2              TI=1;  
+  27   2              if(a>b) printf("a>b\n");   
+  28   2              else printf("a<b\n");  
+  29   2                
+  30   2              TI=0;  
+  31   2        
+  32   2              //add from 1 to 10  
+  33   2              c=0;    
+  34   2              for (;i<11;i++) c = c + i;  
+  35   2              TI=1;  
+  36   2              printf("c=%d\n",c);    
+  37   2              TI=0;  
+  38   2              P1=i;  
+  39   2        
+  40   2              //get the area of circle 'a'  
+  41   2              s=3.14*a*a;  
+  42   2              TI=1;  
+  43   2              printf("s=%.2f\n",s);  
+  44   2              TI=0;  
+  45   2              P1=s;  
+  46   2          }  
+  47   1      }  
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    249    ----
+   CONSTANT SIZE    =     24    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+C51 COMPILER V9.59.0.0   TEST                                                              03/25/2022 10:20:54 PAGE 2   
+
+   DATA SIZE        =   ----      12
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

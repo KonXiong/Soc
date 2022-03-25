@@ -1,0 +1,92 @@
+C51 COMPILER V9.59.0.0   DEMO                                                              03/25/2022 00:15:35 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE DEMO
+OBJECT MODULE PLACED IN .\Objects\demo.obj
+COMPILER INVOKED BY: D:\Keil_v5\C51\BIN\C51.EXE demo.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\demo
+                    -.lst) TABS(2) OBJECT(.\Objects\demo.obj)
+
+line level    source
+
+   1          #include <stdio.h>
+   2          #include <intrins.h>
+   3          
+   4          unsigned char a[5] _at_ 0x50; 
+   5           
+   6          unsigned char ww0 _at_ 0x30;
+   7          unsigned char ww1 _at_ 0x31;
+   8          unsigned char ww2 _at_ 0x32;
+   9          unsigned char ww3 _at_ 0x33;
+  10          unsigned char ww4 _at_ 0x34;
+  11           
+  12          unsigned char ee0 _at_ 0x40;
+  13          unsigned char ee1 _at_ 0x41;
+  14          unsigned char ee2 _at_ 0x42;
+  15           
+  16          unsigned char bdata BZW _at_ 0x20;  //标志位
+  17          
+  18          sbit BB0 = BZW^0;   //标志位0
+  19          sbit BB1 = BZW^1;   //标志位1
+  20          sbit BB2 = BZW^2;   //标志位2
+  21           
+  22          unsigned char  xx;yy;zz;ACC;B;TL0;TH0;
+  23          int i,k,y,z,x;
+  24           
+  25          void main()
+  26          {
+  27   1      
+  28   1            ww0=0x95;   //存储器窗口    察看30h
+  29   1            ww1=0xa6;                // 察看31h
+  30   1            ww2=0xb7;                // 察看32h
+  31   1            ww3=0x88;                // 察看33h
+  32   1            ww4=0x08;                // 察看34h
+  33   1       
+  34   1            k=ww0+ww1+ww2+ww3+ ww4;  // 观察和堆栈窗口 察看  k=0x282
+  35   1            ww4=k/4;                     // 察看34h   =0xa0 
+  36   1       
+  37   1            ee0=ww4/100;         //察看40h   =0x01
+  38   1            xx=ww4%100;         //察看  xx  观察和堆栈窗口 察看  xx=0x3c
+  39   1            ee1=xx/10;            //察看41h  =0x06
+  40   1            ee2=xx%10;     //察看42h  =0x00
+  41   1              if  (ee0>2)       
+  42   1                  BB0=1;     //察看20h  位0
+  43   1              if  (ee1>=5)    
+  44   1                  BB1=1;     //察看20h  位1
+  45   1              if  (ee2<9)   
+  46   1                  BB2=1;     //察看20h  位2
+  47   1       
+  48   1        for(i=0,k=0x55;i<5;i++,k++)
+  49   1          {
+  50   2              a[i]=k;    // 察看 存储器窗口 (50h---54h）
+  51   2          }
+  52   1          ACC=0xa0;    //专用寄存器窗口   察看 A
+  53   1          B=0xbb;       //专用寄存器窗口   察看 B
+  54   1        switch(ACC+1){
+C51 COMPILER V9.59.0.0   DEMO                                                              03/25/2022 00:15:35 PAGE 2   
+
+  55   2          case 0xa1:
+  56   2            TL0=0x77;TH0=0x88;   //存储器窗口   察看8ah,8ch 
+  57   2            break; 
+  58   2          case 0xa2:
+  59   2            TL0=0x33;TH0=0x44;   //存储器窗口   察看8ah, 8ch
+  60   2          break;
+  61   2          default:
+  62   2             TL0=0x11;  TH0=0x22;   //存储器窗口   察看8ah, 8ch
+  63   2          break; 
+  64   2           }
+  65   1          while(1);
+  66   1      }   
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    251    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     23    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

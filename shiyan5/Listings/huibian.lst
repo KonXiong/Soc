@@ -1,0 +1,39 @@
+A51 MACRO ASSEMBLER  HUIBIAN                                                              03/25/2022 10:11:06 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\huibian.obj
+ASSEMBLER INVOKED BY: D:\Keil_v5\C51\BIN\A51.EXE huibian.a51 SET(SMALL) DEBUG PRINT(.\Listings\huibian.lst) OBJECT(.\Obj
+                      ects\huibian.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     
+                       2     
+                       3     
+                       4     
+                       5     
+                       6     
+                       7     
+                       8     
+0000                   9     ORG 0000H
+0000 7423             10     MOV A,#23H;
+0002 75F014           11     MOV B,#14H;
+0005 25F0             12     ADD A,B; 
+                      13     
+*** WARNING #A41 IN 13 (huibian.a51, LINE 13): MISSING 'END' STATEMENT
+A51 MACRO ASSEMBLER  HUIBIAN                                                              03/25/2022 10:11:06 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  1 WARNING(S), 0 ERROR(S)
