@@ -1,0 +1,108 @@
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    04/04/2022  16:05:30  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
+D:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\paixu2.obj TO .\Objects\paixu2 PRINT (.\Listings\paixu2.m51)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\paixu2.obj (PAIXU2)
+  D:\KEIL_V5\C51\LIB\C51S.LIB (?C_STARTUP)
+  D:\KEIL_V5\C51\LIB\C51S.LIB (?C?IMUL)
+  D:\KEIL_V5\C51\LIB\C51S.LIB (?C?SIDIV)
+  D:\KEIL_V5\C51\LIB\C51S.LIB (?C?UIDIV)
+
+
+LINK MAP OF MODULE:  .\Objects\paixu2 (PAIXU2)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0006H     UNIT         ?DT?PAIXU2
+                    000EH     0022H                  *** GAP ***
+            DATA    0030H     000AH     ABSOLUTE     
+                    003AH     0016H                  *** GAP ***
+            DATA    0050H     0001H     ABSOLUTE     
+            IDATA   0051H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     00F4H     UNIT         ?PR?MAIN?PAIXU2
+            CODE    00F7H     009DH     UNIT         ?C?LIB_CODE
+            CODE    0194H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\paixu2 (PAIXU2)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?PAIXU2
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\paixu2 (PAIXU2)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        PAIXU2
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:0003H         PUBLIC        main
+  D:0008H         PUBLIC        temp
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  04/04/2022  16:05:30  PAGE 2
+
+
+  D:0050H         PUBLIC        ave
+  D:0030H         PUBLIC        a
+  D:000AH         PUBLIC        i
+  D:000CH         PUBLIC        j
+  -------         PROC          MAIN
+  C:0003H         LINE#         24
+  C:0003H         LINE#         27
+  C:001AH         LINE#         28
+  C:0021H         LINE#         29
+  C:0033H         LINE#         32
+  C:0038H         LINE#         33
+  C:004FH         LINE#         34
+  C:0061H         LINE#         35
+  C:0067H         LINE#         36
+  C:006FH         LINE#         37
+  C:0075H         LINE#         38
+  C:0075H         LINE#         39
+  C:007FH         LINE#         40
+  C:008DH         LINE#         43
+  C:0092H         LINE#         44
+  C:0097H         LINE#         45
+  C:00A6H         LINE#         46
+  C:00B4H         LINE#         47
+  C:00B8H         LINE#         48
+  C:00C7H         LINE#         49
+  C:00D6H         LINE#         50
+  C:00F6H         LINE#         51
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        PAIXU2
+
+  -------         MODULE        ?C?IMUL
+  C:00F7H         PUBLIC        ?C?IMUL
+  -------         ENDMOD        ?C?IMUL
+
+  -------         MODULE        ?C?SIDIV
+  C:0109H         PUBLIC        ?C?SIDIV
+  -------         ENDMOD        ?C?SIDIV
+
+  -------         MODULE        ?C?UIDIV
+  C:013FH         PUBLIC        ?C?UIDIV
+  -------         ENDMOD        ?C?UIDIV
+
+Program Size: data=26.0 xdata=0 code=416
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)
