@@ -1,0 +1,4 @@
+".\Objects\hanshu.obj",
+".\Objects\ZLG7289.obj" 
+TO ".\Objects\hanshu" 
+PRINT(".\Listings\hanshu.m51") RAMSIZE(256) 

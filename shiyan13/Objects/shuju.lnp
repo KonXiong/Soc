@@ -1,0 +1,4 @@
+".\Objects\shuju.obj",
+".\Objects\ZLG7289.obj" 
+TO ".\Objects\shuju" 
+PRINT(".\Listings\shuju.m51") RAMSIZE(256) 

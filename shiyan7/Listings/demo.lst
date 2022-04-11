@@ -1,0 +1,134 @@
+C51 COMPILER V9.59.0.0   DEMO                                                              03/27/2022 23:14:37 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE DEMO
+OBJECT MODULE PLACED IN .\Objects\demo.obj
+COMPILER INVOKED BY: D:\Keil_v5\C51\BIN\C51.EXE demo.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\demo
+                    -.lst) TABS(2) OBJECT(.\Objects\demo.obj)
+
+line level    source
+
+   1          #include <C8051F020.h>
+   2          #include "time.h"
+*** WARNING C318 IN LINE 2 OF demo.c: can't open file 'time.h'
+   3          
+   4          void SYSCLK_Init(void);       //系统时钟初始化
+   5          void WDT_Disable(void);       //禁用看门狗定时器
+   6          void PORT_Init(void);       //端口初始化
+   7          //void Delayms(unsigned int time);  //@C8051F020 24M
+   8          void MODE_1();
+   9          void MODE_2();
+  10          void MODE_3();
+  11          void MODE_4();
+  12          
+  13          
+  14          void main()
+  15          {
+  16   1        WDT_Disable();
+  17   1        PORT_Init();
+  18   1        SYSCLK_Init();
+  19   1        while(1){MODE_1();}
+  20   1        //MODE_2();
+  21   1        //MODE_3();
+  22   1        //while(1){MODE_4()};
+  23   1      }
+  24          
+  25          
+  26          void Delayms(unsigned int time) //@C8051F020 24M 软件延时得出
+  27          {
+  28   1        unsigned int i,j;
+  29   1        for(i = 0; i < time; i++)
+  30   1        {
+  31   2          for(j = 0;j < 3390; j++);
+  32   2        } 
+  33   1      }
+  34          
+  35          
+  36          
+  37          void WDT_Disable(void)
+  38          {
+  39   1        /* 禁用看门狗定时器 */
+  40   1        WDTCN = 0xDE;
+  41   1        WDTCN = 0xAD;
+  42   1      }
+  43          
+  44          
+  45          void SYSCLK_Init(void)
+  46          {
+  47   1        /* 软件延时循环变量 */
+  48   1        int i = 0;        
+  49   1        
+  50   1        /* 启动外部晶体振荡器 OSCXCN = 01100111B */
+  51   1        /* [6:4] = 110B，晶体振荡；[2:0] = 111B，频率 > 6.7MHz */
+  52   1        OSCXCN = 0x67;        
+  53   1        
+C51 COMPILER V9.59.0.0   DEMO                                                              03/27/2022 23:14:37 PAGE 2   
+
+  54   1        /* 等待晶体振荡器启动 SYSCLK = 2M 调试得延时约1ms */
+  55   1        for(i = 0; i < 256; i++); 
+  56   1        
+  57   1        /* 等待振荡器稳定 等待OSCXCN.1 = 1*/
+  58   1        while(!(OSCXCN & 0x80));
+  59   1        
+  60   1        /* OSCICN = 10001000B [7] = 1 使能时钟丢失检测器；[3] = 1 选择外部振荡器 */
+  61   1        OSCICN = 0x88;
+  62   1      }
+  63          void PORT_Init(void)
+  64          {
+  65   1        /* 使能交叉开关 */
+  66   1        XBR2 = 0x40;
+  67   1      }
+  68          
+  69          void MODE_1(){
+  70   1        int i;
+  71   1        for(i=0;i<6;i++){
+  72   2          P5 = 0xF0;
+  73   2          Delayms(100);
+  74   2          P5 = 0x0F;
+  75   2          Delayms(100);
+  76   2        }
+  77   1      }
+  78          
+  79          
+  80          void MODE_2(){
+  81   1        unsigned char temp = 0x5F;
+  82   1        while(1){
+  83   2          temp = temp>>1|temp<<7;
+  84   2          P5 = temp;
+  85   2          Delayms(500);
+  86   2        }
+  87   1      }
+  88          
+  89          void MODE_3(){
+  90   1        unsigned char temp = 0x5F;
+  91   1        while(1){
+  92   2          temp = temp<<1|temp>>7;
+  93   2          P5 = temp;
+  94   2          Delayms(500);
+  95   2        }
+  96   1      }
+  97          void MODE_4(){
+  98   1        int i;
+  99   1        for(i=0;i<4;i++){
+ 100   2          P5 = 0xAA;
+ 101   2          Delayms(500);
+ 102   2          P5 = 0x55;
+ 103   2          Delayms(500);
+ 104   2        }
+ 105   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    183    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+C51 COMPILER V9.59.0.0   DEMO                                                              03/27/2022 23:14:37 PAGE 3   
+
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  0 ERROR(S)

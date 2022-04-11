@@ -1,0 +1,506 @@
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    04/08/2022  09:46:36  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
+D:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\hanshu.obj, .\Objects\ZLG7289.obj TO .\Objects\hanshu PRINT (.\Listings\hanshu.m51
+>> ) RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\hanshu.obj (HANSHU)
+  .\Objects\ZLG7289.obj (ZLG7289)
+  D:\KEIL_V5\C51\LIB\C51S.LIB (?C_STARTUP)
+  D:\KEIL_V5\C51\LIB\C51S.LIB (?C?LMUL)
+  D:\KEIL_V5\C51\LIB\C51S.LIB (?C?SLDIV)
+  D:\KEIL_V5\C51\LIB\C51S.LIB (?C?SLSHR)
+  D:\KEIL_V5\C51\LIB\C51S.LIB (?C_INIT)
+  D:\KEIL_V5\C51\LIB\C51S.LIB (?C?ULDIV)
+
+
+LINK MAP OF MODULE:  .\Objects\hanshu (HANSHU)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     000DH     UNIT         _DATA_GROUP_
+            DATA    0015H     000AH     UNIT         ?DT?HANSHU
+            DATA    001FH     0001H     UNIT         ?DT?ZLG7289_SPI_READ?ZLG7289
+            BIT     0020H.0   0000H.1   UNIT         _BIT_GROUP_
+                    0020H.1   0000H.7                *** GAP ***
+            DATA    0021H     0001H     UNIT         ?DT?ZLG7289_KEY?ZLG7289
+            DATA    0022H     0001H     UNIT         ?DT?ZLG7289
+            IDATA   0023H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0071H     UNIT         ?PR?ADC0_ISR?HANSHU
+            CODE    0074H     0007H     UNIT         ?PR?PORT_INIT?HANSHU
+            CODE    007BH     0003H     ABSOLUTE     
+            CODE    007EH     0131H     UNIT         ?C?LIB_CODE
+            CODE    01AFH     0114H     UNIT         ?PR?MAIN?HANSHU
+            CODE    02C3H     008CH     UNIT         ?C_C51STARTUP
+            CODE    034FH     0044H     UNIT         ?C?LDIV
+            CODE    0393H     003EH     UNIT         ?PR?_ZLG7289_CMD_DAT?ZLG7289
+            CODE    03D1H     0037H     UNIT         ?PR?ZLG7289_KEY?ZLG7289
+            CODE    0408H     002BH     UNIT         ?PR?_ZLG7289_CMD?ZLG7289
+            CODE    0433H     0027H     UNIT         ?PR?ZLG7289_SPI_READ?ZLG7289
+            CODE    045AH     0026H     UNIT         ?PR?_ZLG7289_DOWNLOAD?ZLG7289
+            CODE    0480H     0026H     UNIT         ?PR?_ZLG7289_INIT?ZLG7289
+            CODE    04A6H     0025H     UNIT         ?PR?_ZLG7289_SPI_WRITE?ZLG7289
+            CODE    04CBH     0020H     UNIT         ?PR?_DELAY?HANSHU
+            CODE    04EBH     001CH     UNIT         ?PR?SYSCLK_INIT?HANSHU
+            CODE    0507H     001AH     UNIT         ?PR?_TIMER3_INIT?HANSHU
+            CODE    0521H     0010H     UNIT         ?PR?ADC0_INIT?HANSHU
+            CODE    0531H     000BH     UNIT         ?C_INITSEG
+            CODE    053CH     0009H     UNIT         ?PR?DAC0_INIT?HANSHU
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  04/08/2022  09:46:36  PAGE 2
+
+
+            CODE    0545H     0003H     UNIT         ?CO?ZLG7289
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\hanshu (HANSHU)
+
+
+SEGMENT                                   BIT_GROUP          DATA_GROUP 
+  +--> CALLED SEGMENT                  START    LENGTH     START    LENGTH
+--------------------------------------------------------------------------
+?C_C51STARTUP                          -----    -----      -----    -----
+  +--> ?PR?MAIN?HANSHU
+  +--> ?C_INITSEG
+
+?PR?MAIN?HANSHU                        -----    -----      0008H    0008H
+  +--> ?PR?SYSCLK_INIT?HANSHU
+  +--> ?PR?PORT_INIT?HANSHU
+  +--> ?PR?_TIMER3_INIT?HANSHU
+  +--> ?PR?ADC0_INIT?HANSHU
+  +--> ?PR?DAC0_INIT?HANSHU
+  +--> ?PR?_ZLG7289_INIT?ZLG7289
+  +--> ?PR?_ZLG7289_CMD?ZLG7289
+  +--> ?PR?_DELAY?HANSHU
+  +--> ?PR?_ZLG7289_DOWNLOAD?ZLG7289
+
+?PR?_ZLG7289_INIT?ZLG7289              -----    -----      -----    -----
+  +--> ?PR?_ZLG7289_DOWNLOAD?ZLG7289
+
+?PR?_ZLG7289_DOWNLOAD?ZLG7289          0020H.0  0000H.1    0010H    0003H
+  +--> ?CO?ZLG7289
+  +--> ?PR?_ZLG7289_CMD_DAT?ZLG7289
+
+?PR?_ZLG7289_CMD_DAT?ZLG7289           -----    -----      0013H    0001H
+  +--> ?PR?_ZLG7289_SPI_WRITE?ZLG7289
+
+?PR?_ZLG7289_SPI_WRITE?ZLG7289         -----    -----      0014H    0001H
+
+?PR?_ZLG7289_CMD?ZLG7289               -----    -----      0010H    0001H
+  +--> ?PR?_ZLG7289_SPI_WRITE?ZLG7289
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\hanshu (HANSHU)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        HANSHU
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:00FFH         PUBLIC        WDTCN
+  D:00BCH         PUBLIC        ADC0CF
+  D:00B0H         PUBLIC        P3
+  B:00A8H.7       PUBLIC        EA
+  D:00E7H         PUBLIC        EIE2
+  D:00E8H         PUBLIC        ADC0CN
+  D:00D4H         PUBLIC        DAC0CN
+  D:00A8H         PUBLIC        IE
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  04/08/2022  09:46:36  PAGE 3
+
+
+  C:04CBH         PUBLIC        _delay
+  D:00D8H         PUBLIC        PCA0CN
+  D:00B8H         PUBLIC        IP
+  C:0074H         PUBLIC        Port_Init
+  D:00E2H         PUBLIC        XBR1
+  D:00E3H         PUBLIC        XBR2
+  D:00D1H         PUBLIC        REF0CN
+  B:00E8H.5       PUBLIC        AD0INT
+  D:001BH         PUBLIC        result
+  D:00C0H         PUBLIC        SMB0CN
+  C:01AFH         PUBLIC        main
+  D:0094H         PUBLIC        TMR3
+  C:0507H         PUBLIC        _Timer3_Init
+  D:00F8H         PUBLIC        SPI0CN
+  D:0088H         PUBLIC        TCON
+  D:00BBH         PUBLIC        AMX0SL
+  D:0091H         PUBLIC        TMR3CN
+  D:00D3H         PUBLIC        DAC0H
+  D:00B2H         PUBLIC        OSCICN
+  D:00D2H         PUBLIC        DAC0L
+  D:0092H         PUBLIC        TMR3RL
+  C:0003H         PUBLIC        ADC0_ISR
+  B:00E8H.7       PUBLIC        AD0EN
+  D:00B1H         PUBLIC        OSCXCN
+  D:0098H         PUBLIC        SCON0
+  D:00C8H         PUBLIC        T2CON
+  C:053CH         PUBLIC        DAC0_Init
+  C:0521H         PUBLIC        ADC0_Init
+  C:04EBH         PUBLIC        Sysclk_Init
+  D:00D2H         PUBLIC        DAC0
+  D:00BEH         PUBLIC        ADC0
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        n
+  -------         DO            
+  D:0004H         SYMBOL        i
+  -------         ENDDO         
+  C:04CBH         LINE#         35
+  C:04CBH         LINE#         37
+  C:04D5H         LINE#         38
+  C:04EAH         LINE#         39
+  C:04EAH         LINE#         40
+  -------         ENDPROC       _DELAY
+  -------         PROC          MAIN
+  -------         DO            
+  D:0008H         SYMBOL        voltage
+  D:000CH         SYMBOL        count
+  D:000EH         SYMBOL        UP
+  -------         ENDDO         
+  C:01AFH         LINE#         42
+  C:01AFH         LINE#         45
+  C:01B5H         LINE#         47
+  C:01B8H         LINE#         48
+  C:01BBH         LINE#         50
+  C:01BEH         LINE#         51
+  C:01C1H         LINE#         52
+  C:01C8H         LINE#         53
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  04/08/2022  09:46:36  PAGE 4
+
+
+  C:01CBH         LINE#         54
+  C:01CEH         LINE#         55
+  C:01D3H         LINE#         56
+  C:01D8H         LINE#         58
+  C:01DAH         LINE#         59
+  C:01DCH         LINE#         60
+  C:01DCH         LINE#         62
+  C:01E9H         LINE#         63
+  C:01E9H         LINE#         64
+  C:01F5H         LINE#         65
+  C:01F7H         LINE#         67
+  C:01F7H         LINE#         68
+  C:01FCH         LINE#         69
+  C:01FCH         LINE#         70
+  C:0202H         LINE#         71
+  C:0209H         LINE#         72
+  C:022CH         LINE#         73
+  C:0240H         LINE#         74
+  C:026EH         LINE#         75
+  C:029BH         LINE#         76
+  C:02B9H         LINE#         77
+  C:02C0H         LINE#         78
+  -------         ENDPROC       MAIN
+  -------         PROC          SYSCLK_INIT
+  -------         DO            
+  D:0006H         SYMBOL        i
+  -------         ENDDO         
+  C:04EBH         LINE#         81
+  C:04EBH         LINE#         83
+  C:04EEH         LINE#         84
+  C:04FEH         LINE#         85
+  C:0503H         LINE#         86
+  C:0506H         LINE#         87
+  -------         ENDPROC       SYSCLK_INIT
+  -------         PROC          PORT_INIT
+  C:0074H         LINE#         89
+  C:0074H         LINE#         90
+  C:0077H         LINE#         91
+  C:007AH         LINE#         92
+  -------         ENDPROC       PORT_INIT
+  -------         PROC          ADC0_INIT
+  C:0521H         LINE#         94
+  C:0521H         LINE#         95
+  C:0524H         LINE#         97
+  C:0527H         LINE#         98
+  C:052AH         LINE#         99
+  C:052DH         LINE#         100
+  C:052DH         LINE#         101
+  C:0530H         LINE#         102
+  -------         ENDPROC       ADC0_INIT
+  -------         PROC          _TIMER3_INIT
+  D:0006H         SYMBOL        counts
+  C:0507H         LINE#         104
+  C:0507H         LINE#         105
+  C:050AH         LINE#         106
+  C:0514H         LINE#         107
+  C:051AH         LINE#         108
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  04/08/2022  09:46:36  PAGE 5
+
+
+  C:051DH         LINE#         109
+  C:0520H         LINE#         110
+  -------         ENDPROC       _TIMER3_INIT
+  -------         PROC          DAC0_INIT
+  C:053CH         LINE#         112
+  C:053CH         LINE#         113
+  C:053FH         LINE#         114
+  C:0542H         LINE#         115
+  C:0544H         LINE#         116
+  -------         ENDPROC       DAC0_INIT
+  -------         PROC          ADC0_ISR
+  -------         DO            
+  D:0015H         SYMBOL        int_dec
+  D:0017H         SYMBOL        accumulator
+  -------         ENDDO         
+  C:0003H         LINE#         118
+  C:0014H         LINE#         122
+  C:0016H         LINE#         123
+  C:0031H         LINE#         124
+  C:0039H         LINE#         125
+  C:003FH         LINE#         126
+  C:0044H         LINE#         127
+  C:0059H         LINE#         128
+  C:0065H         LINE#         129
+  C:0065H         LINE#         130
+  -------         ENDPROC       ADC0_ISR
+  -------         ENDMOD        HANSHU
+
+  -------         MODULE        ZLG7289
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:00B0H         PUBLIC        P3
+  C:04A6H         PUBLIC        _ZLG7289_SPI_Write
+  B:00B0H.3       PUBLIC        ZLG7289_pinCS
+  D:00E8H         PUBLIC        ADC0CN
+  D:00A8H         PUBLIC        IE
+  D:00D8H         PUBLIC        PCA0CN
+  D:00B8H         PUBLIC        IP
+  D:00C0H         PUBLIC        SMB0CN
+  D:00F8H         PUBLIC        SPI0CN
+  D:0088H         PUBLIC        TCON
+  C:0480H         PUBLIC        _ZLG7289_Init
+  B:00B0H.4       PUBLIC        ZLG7289_pinCLK
+  B:00B0H.5       PUBLIC        ZLG7289_pinDIO
+  C:03D1H         PUBLIC        ZLG7289_Key
+  C:0408H         PUBLIC        _ZLG7289_cmd
+  B:00B0H.7       PUBLIC        ZLG7289_pinINT
+  D:0098H         PUBLIC        SCON0
+  C:045AH         PUBLIC        _ZLG7289_Download
+  D:00C8H         PUBLIC        T2CON
+  D:0022H         PUBLIC        ZLG7289_Delay_t
+  C:0433H         PUBLIC        ZLG7289_SPI_Read
+  C:0393H         PUBLIC        _ZLG7289_cmd_dat
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          _ZLG7289_SPI_WRITE
+  D:0007H         SYMBOL        dat
+  -------         DO            
+  D:0006H         SYMBOL        t
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  04/08/2022  09:46:36  PAGE 6
+
+
+  -------         DO            
+  D:0014H         SYMBOL        t
+  D:0014H         SYMBOL        t
+  -------         ENDDO         
+  -------         DO            
+  D:0014H         SYMBOL        t
+  -------         ENDDO         
+  -------         ENDDO         
+  C:04A6H         LINE#         32
+  C:04A6H         LINE#         33
+  C:04A6H         LINE#         34
+  C:04A8H         LINE#         36
+  C:04A8H         LINE#         37
+  C:04ACH         LINE#         38
+  C:04B0H         LINE#         39
+  C:04B2H         LINE#         40
+  C:04BBH         LINE#         41
+  C:04BDH         LINE#         42
+  C:04C6H         LINE#         43
+  C:04CAH         LINE#         44
+  -------         ENDPROC       _ZLG7289_SPI_WRITE
+  -------         PROC          ZLG7289_SPI_READ
+  -------         DO            
+  D:0007H         SYMBOL        dat
+  D:0006H         SYMBOL        t
+  -------         DO            
+  D:001FH         SYMBOL        t
+  D:001FH         SYMBOL        t
+  -------         ENDDO         
+  -------         DO            
+  D:001FH         SYMBOL        t
+  -------         ENDDO         
+  -------         ENDDO         
+  C:0433H         LINE#         51
+  C:0433H         LINE#         52
+  C:0433H         LINE#         54
+  C:0435H         LINE#         55
+  C:0437H         LINE#         57
+  C:0437H         LINE#         58
+  C:0439H         LINE#         59
+  C:0442H         LINE#         60
+  C:0446H         LINE#         61
+  C:044AH         LINE#         62
+  C:044CH         LINE#         63
+  C:0455H         LINE#         64
+  C:0459H         LINE#         65
+  C:0459H         LINE#         66
+  -------         ENDPROC       ZLG7289_SPI_READ
+  -------         PROC          _ZLG7289_CMD
+  D:0007H         SYMBOL        cmd
+  -------         DO            
+  D:0005H         SYMBOL        sav
+  -------         DO            
+  D:0010H         SYMBOL        t
+  D:0010H         SYMBOL        t
+  -------         ENDDO         
+  -------         DO            
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  04/08/2022  09:46:36  PAGE 7
+
+
+  D:0010H         SYMBOL        t
+  -------         ENDDO         
+  -------         ENDDO         
+  C:0408H         LINE#         73
+  C:0408H         LINE#         74
+  C:0408H         LINE#         75
+  C:040AH         LINE#         76
+  C:040DH         LINE#         77
+  C:040FH         LINE#         78
+  C:041DH         LINE#         79
+  C:0420H         LINE#         80
+  C:0422H         LINE#         81
+  C:0430H         LINE#         82
+  C:0432H         LINE#         83
+  -------         ENDPROC       _ZLG7289_CMD
+  -------         PROC          _ZLG7289_CMD_DAT
+  D:0007H         SYMBOL        cmd
+  D:0005H         SYMBOL        dat
+  -------         DO            
+  D:0004H         SYMBOL        sav
+  -------         DO            
+  D:0013H         SYMBOL        t
+  D:0013H         SYMBOL        t
+  D:0013H         SYMBOL        t
+  -------         ENDDO         
+  -------         DO            
+  D:0013H         SYMBOL        t
+  D:0013H         SYMBOL        t
+  -------         ENDDO         
+  -------         DO            
+  D:0013H         SYMBOL        t
+  -------         ENDDO         
+  -------         ENDDO         
+  C:0393H         LINE#         91
+  C:0393H         LINE#         92
+  C:0393H         LINE#         93
+  C:0395H         LINE#         94
+  C:0398H         LINE#         95
+  C:039AH         LINE#         96
+  C:03A8H         LINE#         97
+  C:03ABH         LINE#         98
+  C:03B9H         LINE#         99
+  C:03BEH         LINE#         100
+  C:03C0H         LINE#         101
+  C:03CEH         LINE#         102
+  C:03D0H         LINE#         103
+  -------         ENDPROC       _ZLG7289_CMD_DAT
+  -------         PROC          _ZLG7289_DOWNLOAD
+  D:0007H         SYMBOL        mod
+  D:0005H         SYMBOL        x
+  B:0020H.0       SYMBOL        dp
+  D:0012H         SYMBOL        dat
+  -------         DO            
+  C:0545H         SYMBOL        ModDat
+  D:0007H         SYMBOL        d1
+  D:0005H         SYMBOL        d2
+  -------         ENDDO         
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  04/08/2022  09:46:36  PAGE 8
+
+
+  C:045AH         LINE#         118
+  C:045AH         LINE#         119
+  C:045AH         LINE#         123
+  C:0466H         LINE#         124
+  C:046CH         LINE#         125
+  C:046FH         LINE#         126
+  C:0472H         LINE#         127
+  C:0477H         LINE#         128
+  C:047DH         LINE#         129
+  -------         ENDPROC       _ZLG7289_DOWNLOAD
+  -------         PROC          ZLG7289_KEY
+  -------         DO            
+  D:0007H         SYMBOL        key
+  -------         DO            
+  D:0021H         SYMBOL        t
+  D:0021H         SYMBOL        t
+  D:0021H         SYMBOL        t
+  -------         ENDDO         
+  -------         DO            
+  D:0021H         SYMBOL        t
+  D:0021H         SYMBOL        t
+  -------         ENDDO         
+  -------         DO            
+  D:0021H         SYMBOL        t
+  -------         ENDDO         
+  -------         ENDDO         
+  C:03D1H         LINE#         137
+  C:03D1H         LINE#         138
+  C:03D1H         LINE#         140
+  C:03D3H         LINE#         141
+  C:03E1H         LINE#         142
+  C:03E6H         LINE#         143
+  C:03F4H         LINE#         144
+  C:03F7H         LINE#         145
+  C:03F9H         LINE#         146
+  C:0407H         LINE#         147
+  C:0407H         LINE#         148
+  -------         ENDPROC       ZLG7289_KEY
+  -------         PROC          _ZLG7289_INIT
+  D:0007H         SYMBOL        t
+  -------         DO            
+  D:0003H         SYMBOL        x
+  -------         ENDDO         
+  C:0480H         LINE#         158
+  C:0480H         LINE#         159
+  C:0480H         LINE#         162
+  C:0482H         LINE#         163
+  C:0484H         LINE#         164
+  C:0486H         LINE#         165
+  C:0488H         LINE#         167
+  C:048AH         LINE#         169
+  C:0496H         LINE#         170
+  C:0496H         LINE#         171
+  C:04A2H         LINE#         172
+  C:04A5H         LINE#         173
+  -------         ENDPROC       _ZLG7289_INIT
+  -------         ENDMOD        ZLG7289
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  04/08/2022  09:46:36  PAGE 9
+
+
+
+  -------         MODULE        ?C?LMUL
+  C:007EH         PUBLIC        ?C?LMUL
+  -------         ENDMOD        ?C?LMUL
+
+  -------         MODULE        ?C?SLDIV
+  C:034FH         PUBLIC        ?C?SLDIV
+  -------         ENDMOD        ?C?SLDIV
+
+  -------         MODULE        ?C?SLSHR
+  C:00CDH         PUBLIC        ?C?SLSHR
+  -------         ENDMOD        ?C?SLSHR
+
+  -------         MODULE        ?C?ULDIV
+  C:011DH         PUBLIC        ?C?ULDIV
+  -------         ENDMOD        ?C?ULDIV
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?ZLG7289_KEY?ZLG7289
+
+Program Size: data=35.1 xdata=0 code=1352
+LINK/LOCATE RUN COMPLETE.  1 WARNING(S),  0 ERROR(S)

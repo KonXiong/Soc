@@ -1,0 +1,143 @@
+C51 COMPILER V9.59.0.0   ZHONGDUAN                                                         04/01/2022 09:01:11 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE ZHONGDUAN
+OBJECT MODULE PLACED IN .\Objects\zhongduan.obj
+COMPILER INVOKED BY: D:\Keil_v5\C51\BIN\C51.EXE zhongduan.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings
+                    -\zhongduan.lst) TABS(2) OBJECT(.\Objects\zhongduan.obj)
+
+line level    source
+
+   1          /*****************************************************************************
+   2          File name: zhongduan
+   3          Description: 中断测试
+   4          Author: 熊康
+   5          Version: V1.0
+   6          Date: 2022.4.1
+   7          *****************************************************************************/
+   8          
+   9          #include<C8051F020.h>
+  10          #define LED P5//宏定义。
+  11          unsigned int mod=0;
+  12          a=0;
+  13          void delay(unsigned int n)//延时函数
+  14          {
+  15   1      unsigned i,j;
+  16   1      for(i=0;i<n;i++)
+  17   1      for(j=0;j<1000;j++);
+  18   1      }
+  19          void SYSCLK(void) //系统时钟
+  20          {
+  21   1      int i;
+  22   1      OSCXCN=0x67;
+  23   1      for(i=0;i<256;i++);
+  24   1      while(!(OSCXCN&0X80));
+  25   1      OSCXCN=0X88;
+  26   1      }
+  27          void mod1(void)//显示模式1：全亮并闪烁4次。
+  28          {
+  29   1      int k;
+  30   1      for(k=0;k<4;k++)
+  31   1      {
+  32   2      LED=0x00;
+  33   2      delay(100);
+  34   2      LED=0xff;
+  35   2      delay(100);
+  36   2      }}
+  37          void mod2(void)//显示模式2：点亮一个发光管,右循环。
+  38          {  LED=0xfe;  
+  39   1      delay(100);  
+  40   1      LED=0xfd;  
+  41   1      delay(100); 
+  42   1       LED=0xfb;  
+  43   1      delay(100); 
+  44   1       LED=0xf7; 
+  45   1       delay(100); 
+  46   1       LED=0xef;  
+  47   1      delay(100); 
+  48   1       LED=0xdf; 
+  49   1       delay(100); 
+  50   1       LED=0xbf; 
+  51   1       delay(100); 
+  52   1       LED=0x7f;  
+  53   1      delay(100);
+  54   1      }//右循环过程。
+C51 COMPILER V9.59.0.0   ZHONGDUAN                                                         04/01/2022 09:01:11 PAGE 2   
+
+  55          void mod3(void)//显示模式3：点亮一个发光管,左循环。
+  56          {  
+  57   1      LED=0x7f;
+  58   1        delay(100);  
+  59   1      LED=0xbf;  
+  60   1      delay(100); 
+  61   1       LED=0xdf;  
+  62   1      delay(100);  
+  63   1      LED=0xef;  
+  64   1      delay(100); 
+  65   1       LED=0xf7; 
+  66   1       delay(100); 
+  67   1       LED=0xfb;  
+  68   1      delay(100); 
+  69   1       LED=0xfd;  
+  70   1      delay(100);  
+  71   1      LED=0xfe;  
+  72   1      delay(100);
+  73   1      }//左循环过程。
+  74          void  mod4(void)//显示模式4：单数LED与双数LED交替点亮4次。
+  75          {int k;
+  76   1      for(k=0;k<4;k++)
+  77   1      {LED=0xaa;
+  78   2      delay(100);
+  79   2      LED=0x55;
+  80   2      delay(100); 
+  81   2      }}void PIO(void)//配置交叉译码开关,使P0口成为/INT0
+  82          {
+  83   1      P0MDOUT=0x00;//配置输出为漏极开路P0=0xff;
+  84   1      XBR0=0x00;  
+  85   1      XBR1=0x04;// /INT0使能XBR2=0x40;//交叉开关使能
+  86   1      } 
+  87           void IT(void)
+  88          {EA=0;//CPU关中断，禁止一切中断
+  89   1      EX0=1;//允许外部中断0中断5
+  90   1      IT0=0;//配置为低电平触发
+  91   1      PX0=1;//外部中断0为高优先级
+  92   1      EA=1;//CPU开放中断
+  93   1      }
+  94          void main()//主函数
+  95          {WDTCN=0xde;
+  96   1      WDTCN=0xad;//禁止看门狗
+  97   1      SYSCLK();
+  98   1      IT();
+  99   1      PIO();
+ 100   1      LED=0xff;//初始状态LED为全部熄灭
+ 101   1      while(1)
+ 102   1      {
+ 103   2      if(a==0)
+ 104   2      mod1();
+ 105   2      else if(a==1)
+ 106   2      mod2();
+ 107   2      else if(a==2)
+ 108   2      mod3();
+ 109   2      else if(a==3)
+ 110   2      mod4();
+ 111   2      }}
+ 112          void INT0(void) interrupt 0//外部中断0
+ 113          {mod++;
+ 114   1      a=mod%4;
+ 115   1      }
+
+C51 COMPILER V9.59.0.0   ZHONGDUAN                                                         04/01/2022 09:01:11 PAGE 3   
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    321    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      4    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

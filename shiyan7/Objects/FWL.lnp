@@ -1,0 +1,3 @@
+".\Objects\FWL.obj" 
+TO ".\Objects\FWL" 
+PRINT(".\Listings\FWL.m51") RAMSIZE(256) 

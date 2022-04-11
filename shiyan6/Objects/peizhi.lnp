@@ -1,0 +1,3 @@
+".\Objects\peizhi.obj" 
+TO ".\Objects\peizhi" 
+PRINT(".\Listings\peizhi.m51") RAMSIZE(256) 

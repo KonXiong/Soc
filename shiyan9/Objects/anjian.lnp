@@ -1,0 +1,4 @@
+".\Objects\anjian.obj",
+".\Objects\ZLG7289.obj" 
+TO ".\Objects\anjian" 
+PRINT(".\Listings\anjian.m51") RAMSIZE(256) 

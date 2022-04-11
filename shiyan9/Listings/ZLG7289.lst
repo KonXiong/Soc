@@ -1,0 +1,205 @@
+C51 COMPILER V9.59.0.0   ZLG7289                                                           04/08/2022 09:39:33 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE ZLG7289
+OBJECT MODULE PLACED IN .\Objects\ZLG7289.obj
+COMPILER INVOKED BY: D:\Keil_v5\C51\BIN\C51.EXE ZLG7289.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\Z
+                    -LG7289.lst) TABS(2) OBJECT(.\Objects\ZLG7289.obj)
+
+line level    source
+
+   1          #include <C8051F020.H>
+   2          #include "ZLG7289.h"
+   3          
+   4          //定义一个全局变量，用于延时
+   5          //该变量在调用函数ZLG7289_Init()时被初始化
+   6          unsigned char ZLG7289_Delay_t;
+   7          /*
+   8          宏定义：ZLG7289_ShortDelay()
+   9          功能：短延时
+  10          说明：延时(ZLG7289_Delay_t*2+2)个机器周期
+  11          */
+  12          #define ZLG7289_ShortDelay() \
+  13          {\
+  14          unsigned char t = ZLG7289_Delay_t;\
+  15          while ( --t != 0 );\
+  16          }
+  17          /*
+  18          宏定义：ZLG7289_LongDelay()
+  19          功能：长延时
+  20          说明：延时(ZLG7289_Delay_t*12+8)个机器周期
+  21          */
+  22          #define ZLG7289_LongDelay() \
+  23          {\
+  24          unsigned char t = ZLG7289_Delay_t * 6;\
+  25          while ( --t != 0 );\
+  26          }
+  27          /*
+  28          函数：ZLG7289_SPI_Write()
+  29          功能：向SPI 总线写入1 个字节的数据
+  30          参数：
+  31          dat：要写入的数据
+  32          */
+  33          void ZLG7289_SPI_Write(char dat)    // reentrant//去除可重入属性，否则程序不能正常运行
+  34          {
+  35   1      unsigned char t = 8;
+  36   1      do
+  37   1      {
+  38   2      ZLG7289_pinDIO = (bit)(dat & 0x80);
+  39   2      dat <<= 1;
+  40   2      ZLG7289_pinCLK = 1;
+  41   2      ZLG7289_ShortDelay();
+  42   2      ZLG7289_pinCLK = 0;
+  43   2      ZLG7289_ShortDelay();
+  44   2      } while ( --t != 0 );
+  45   1      }
+  46          /*
+  47          函数：ZLG7289_SPI_Read()
+  48          功能：从SPI 总线读取1 个字节的数据
+  49          返回：
+  50          读取到的数据
+  51          */
+  52          char ZLG7289_SPI_Read()      //reentrant //   去除可重入属性，否则程序不能正常运行
+  53          {
+  54   1      char dat;
+C51 COMPILER V9.59.0.0   ZLG7289                                                           04/08/2022 09:39:33 PAGE 2   
+
+  55   1      unsigned char t = 8;
+  56   1      ZLG7289_pinDIO = 1; //读取数据之前DIO 引脚要置1 以切换到输入状态
+  57   1      do
+  58   1      {
+  59   2      ZLG7289_pinCLK = 1;
+  60   2      ZLG7289_ShortDelay();
+  61   2      dat <<= 1;
+  62   2      if ( ZLG7289_pinDIO ) dat++;
+  63   2      ZLG7289_pinCLK = 0;
+  64   2      ZLG7289_ShortDelay();
+  65   2      } while ( --t != 0 );
+  66   1      return dat;
+  67   1      }
+  68          /*
+  69          函数：ZLG7289_cmd()
+  70          功能：执行ZLG7289 纯指令
+  71          参数：
+  72          cmd：命令字
+  73          */
+  74          void ZLG7289_cmd(char cmd)
+  75          {
+  76   1      char sav = IE;
+  77   1      IE &= 0xFA; //关闭外部中断
+  78   1      ZLG7289_pinCS = 0;
+  79   1      ZLG7289_LongDelay();
+  80   1      ZLG7289_SPI_Write(cmd);
+  81   1      ZLG7289_pinCS = 1;
+  82   1      ZLG7289_LongDelay();
+  83   1      IE = sav; //恢复IE
+  84   1      }
+  85          /*
+  86          函数：ZLG7289_cmd_dat()
+  87          功能：执行ZLG7289 带数据指令
+  88          参数：
+  89          cmd：命令字
+  90          dat：数据
+  91          */
+  92          void ZLG7289_cmd_dat(char cmd, char dat)
+  93          {
+  94   1      char sav = IE;
+  95   1      IE &= 0xFA; //关闭外部中断
+  96   1      ZLG7289_pinCS = 0;
+  97   1      ZLG7289_LongDelay();
+  98   1      ZLG7289_SPI_Write(cmd);
+  99   1      ZLG7289_LongDelay();
+ 100   1      ZLG7289_SPI_Write(dat);
+ 101   1      ZLG7289_pinCS = 1;
+ 102   1      ZLG7289_LongDelay();
+ 103   1      IE = sav; //恢复IE
+ 104   1      }
+ 105          /*
+ 106          函数：ZLG7289_Download()
+ 107          功能：下载数据
+ 108          参数：
+ 109          mod=0：下载数据且按方式0 译码
+ 110          mod=1：下载数据且按方式1 译码
+ 111          mod=2：下载数据但不译码
+ 112          x：数码管编号（横坐标），取值0～7
+ 113          dp=0：小数点不亮
+ 114          dp=1：小数点亮
+ 115          dat：要显示的数据
+ 116          说明：
+C51 COMPILER V9.59.0.0   ZLG7289                                                           04/08/2022 09:39:33 PAGE 3   
+
+ 117          译码方式的具体含义请参考数据手册
+ 118          */
+ 119          void ZLG7289_Download(unsigned char mod, char x, bit dp, char dat)
+ 120          {
+ 121   1      code char ModDat[3] = {0x80,0xC8,0x90};
+ 122   1      char d1;
+ 123   1      char d2;
+ 124   1      if ( mod > 2 ) mod = 2;
+ 125   1      d1 = ModDat[mod];
+ 126   1      x &= 0x07;
+ 127   1      d1 |= x;
+ 128   1      d2 = dat & 0x7F;
+ 129   1      if ( dp ) d2 |= 0x80;
+ 130   1      ZLG7289_cmd_dat(d1,d2);
+ 131   1      }
+ 132          /*
+ 133          功能：执行ZLG7289 键盘命令
+ 134          返回：
+ 135          返回读到的按键值：0～63
+ 136          如果返回0xFF 则表示没有键按下
+ 137          */
+ 138          char ZLG7289_Key()      //reentrant  //去除可重入属性，否则程序不能正常运行
+ 139          {
+ 140   1      char key;
+ 141   1      ZLG7289_pinCS = 0;
+ 142   1      ZLG7289_LongDelay();
+ 143   1      ZLG7289_SPI_Write(0x15);
+ 144   1      ZLG7289_LongDelay();
+ 145   1      key = ZLG7289_SPI_Read();
+ 146   1      ZLG7289_pinCS = 1;
+ 147   1      ZLG7289_LongDelay();
+ 148   1      return key;
+ 149   1      }
+ 150          /*
+ 151          函数：ZLG7289_Init()
+ 152          功能：ZLG7289 初始化
+ 153          参数：
+ 154          t：SPI 总线的延时值设置，取值1-40（超出范围可能导致错误）
+ 155          说明：
+ 156          t的取值可以参照以下公式：t >= 5 * f1 / f2，其中f1 表示80C51 的
+ 157          晶振频率，f2 表示ZLG7289 的晶振频率
+ 158          */
+ 159          void ZLG7289_Init(unsigned char t)
+ 160          {
+ 161   1      unsigned char x;
+ 162   1      //I/O 口初始化
+ 163   1      ZLG7289_pinCS = 1;
+ 164   1      ZLG7289_pinCLK = 0;
+ 165   1      ZLG7289_pinDIO = 1;
+ 166   1      ZLG7289_pinINT = 1;
+ 167   1      //延时初始化
+ 168   1      ZLG7289_Delay_t = t;
+ 169   1      //点亮所有数码管
+ 170   1      for ( x=0; x<8; x++ )
+ 171   1      {
+ 172   2      ZLG7289_Download(1,x,1,8);
+ 173   2      }
+ 174   1      }
+ 175          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+C51 COMPILER V9.59.0.0   ZLG7289                                                           04/08/2022 09:39:33 PAGE 4   
+
+   CODE SIZE        =    312    ----
+   CONSTANT SIZE    =      3    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1       8
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----       1
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

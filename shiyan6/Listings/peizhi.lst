@@ -1,0 +1,69 @@
+C51 COMPILER V9.59.0.0   PEIZHI                                                            04/08/2022 08:07:48 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE PEIZHI
+OBJECT MODULE PLACED IN .\Objects\peizhi.obj
+COMPILER INVOKED BY: D:\Keil_v5\C51\BIN\C51.EXE peizhi.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\pe
+                    -izhi.lst) TABS(2) OBJECT(.\Objects\peizhi.obj)
+
+line level    source
+
+   1          /*****************************************************************************
+   2          File name: peizhi
+   3          Description: 配置测试
+   4          Author: 熊康
+   5          Version: V1.0
+   6          Date: 2022.4.1
+   7          *****************************************************************************/
+   8          #include<stdio.h>
+   9          #include <C8051F020.H>
+  10          
+  11          
+  12          void main(){
+  13   1        int i,j;
+  14   1        
+  15   1        /* 启动外部晶体振荡器 OSCXCN = 01100111B */
+  16   1        /* [6:4] = 110B，晶体振荡；[2:0] = 111B，频率 > 6.7MHz */
+  17   1        OSCXCN = 0x67;        
+  18   1        
+  19   1        /* 等待晶体振荡器启动 SYSCLK = 2M 调试得延时约1ms */
+  20   1        for(i = 0; i < 256; i++); 
+  21   1        
+  22   1        /* 等待振荡器稳定 等待OSCXCN.1 = 1*/
+  23   1        while(!(OSCXCN & 0x80));
+  24   1        
+  25   1        /* OSCICN = 10001000B [7] = 1 使能时钟丢失检测器；[3] = 1 选择外部振荡器 */
+  26   1        OSCICN = 0x88;
+  27   1        
+  28   1        /*配置*/
+  29   1        XBR2 |= 0x40; //XBARE交叉开关使能 0100_0000
+  30   1        XBR0 |= 0x02; //SPI连到端口引脚 0000_0010
+  31   1        XBR1 |= 0x1E; //T0、T1、/INT0和/INT1分配端口引脚 0001_1110
+  32   1        P1MDIN |= 0x1F;  //将P1.5、 P1.6 和P1.7配置为模拟输入 0001_1111
+  33   1        
+  34   1        WDTCN=0xde;
+  35   1        WDTCN=0xad;//禁止看门狗
+  36   1        /*输出矩形波*/
+  37   1        for(i=0;i<1000;i++){
+  38   2          P2=0xFF;    //高电平
+  39   2          for(j=0;j<3000;j++);
+  40   2          P2=0x00;    //低电平
+  41   2          for(j=0;j<3000;j++);
+  42   2        }
+  43   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     93    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+C51 COMPILER V9.59.0.0   PEIZHI                                                            04/08/2022 08:07:48 PAGE 2   
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

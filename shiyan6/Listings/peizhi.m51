@@ -1,0 +1,100 @@
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    04/08/2022  08:07:48  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
+D:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\peizhi.obj TO .\Objects\peizhi PRINT (.\Listings\peizhi.m51) RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\peizhi.obj (PEIZHI)
+  D:\KEIL_V5\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  .\Objects\peizhi (PEIZHI)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            IDATA   0008H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     005DH     UNIT         ?PR?MAIN?PEIZHI
+            CODE    0060H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\peizhi (PEIZHI)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?PEIZHI
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\peizhi (PEIZHI)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        PEIZHI
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:00FFH         PUBLIC        WDTCN
+  D:00A0H         PUBLIC        P2
+  D:00E8H         PUBLIC        ADC0CN
+  D:00A8H         PUBLIC        IE
+  D:00D8H         PUBLIC        PCA0CN
+  D:00B8H         PUBLIC        IP
+  D:00E1H         PUBLIC        XBR0
+  D:00E2H         PUBLIC        XBR1
+  D:00E3H         PUBLIC        XBR2
+  D:00C0H         PUBLIC        SMB0CN
+  C:0003H         PUBLIC        main
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  04/08/2022  08:07:48  PAGE 2
+
+
+  D:00BDH         PUBLIC        P1MDIN
+  D:00F8H         PUBLIC        SPI0CN
+  D:0088H         PUBLIC        TCON
+  D:00B2H         PUBLIC        OSCICN
+  D:00B1H         PUBLIC        OSCXCN
+  D:0098H         PUBLIC        SCON0
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          MAIN
+  -------         DO            
+  D:0006H         SYMBOL        i
+  D:0004H         SYMBOL        j
+  -------         ENDDO         
+  C:0003H         LINE#         12
+  C:0003H         LINE#         17
+  C:0006H         LINE#         20
+  C:0016H         LINE#         23
+  C:001BH         LINE#         26
+  C:001EH         LINE#         29
+  C:0021H         LINE#         30
+  C:0024H         LINE#         31
+  C:0027H         LINE#         32
+  C:002AH         LINE#         34
+  C:002DH         LINE#         35
+  C:0030H         LINE#         37
+  C:0033H         LINE#         38
+  C:0036H         LINE#         39
+  C:0044H         LINE#         40
+  C:0047H         LINE#         41
+  C:0054H         LINE#         42
+  C:005FH         LINE#         43
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        PEIZHI
+
+Program Size: data=9.0 xdata=0 code=108
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

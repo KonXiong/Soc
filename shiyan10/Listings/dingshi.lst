@@ -1,0 +1,158 @@
+C51 COMPILER V9.59.0.0   DINGSHI                                                           04/08/2022 09:42:01 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE DINGSHI
+OBJECT MODULE PLACED IN .\Objects\dingshi.obj
+COMPILER INVOKED BY: D:\Keil_v5\C51\BIN\C51.EXE dingshi.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\d
+                    -ingshi.lst) TABS(2) OBJECT(.\Objects\dingshi.obj)
+
+line level    source
+
+   1          /*****************************************************************************
+   2          File name: dingshi
+   3          Description: 定时器
+   4          Author: 熊康
+   5          Version: V1.0
+   6          Date: 2022.4.8
+   7          *****************************************************************************/
+   8          #include "C8051F020.H"
+   9          #include "ZLG7289.h"
+  10          
+  11          
+  12          unsigned char Time [8]; //按位记录时间的数组
+  13          unsigned char Key = 0XFE; //按键值
+  14          unsigned char count = 50; //计数,20ms为一周期,50次为1s
+  15          unsigned char second = 0; //秒针
+  16          unsigned char minute = 0; //分针
+  17          unsigned char hour =0; //时针
+  18          
+  19          /*将十位数时间转化为按个位保存,记录到数组中*/
+  20          void MakeTime (void);
+  21          
+  22          //系统时钟初始化函数,选用外部时钟源24M晶振
+  23          void Sysclk_Init (void){
+  24   1        int i =0;
+  25   1        OSCXCN = 0x77;
+  26   1        for(i= 0;i< 3000; i++);
+  27   1        while ( (OSCXCN & 0x88) ==0);
+  28   1        OSCXCN =0x08;
+  29   1      }
+  30          
+  31          /*关闭看门狗*/
+  32          void WatchDog_Init (void) {
+  33   1        EA=0;
+  34   1        WDTCN =0xDE;
+  35   1        WDTCN = 0xAD;
+  36   1        EA=1;
+  37   1      }
+  38          
+  39          void PortIO_Init (void){
+  40   1        XBR2 =0x40;
+  41   1        P3MDOUT = 0x00;
+  42   1        EIE2 =0x20;
+  43   1      }
+  44          
+  45          //定时器1初始化函数
+  46          void Timer1_Init (void){
+  47   1        CKCON &= 0xef;//0b_1110_1111,TlM=0,选择系统时钟源12分频
+  48   1        TMOD = 0x10; //T1M1T1MO = 01,16位计数器
+  49   1        //想要做到1s 的计数，在两个寄存器中放置初值，正好让计数40000次之后，达到65
+             -523产生计数溢出，记录一次计数
+  50   1        TH1 =(65535 - 3700)/256;//20ms,取高8位
+  51   1        TL1 =(65535 - 3700)%256; //20ms,取低8位
+  52   1        IE |=0x88;//允许T1中断
+  53   1        IP |=0x08; //TF1为高级中断
+C51 COMPILER V9.59.0.0   DINGSHI                                                           04/08/2022 09:42:01 PAGE 2   
+
+  54   1        TCON |=0x40; //启动T1
+  55   1      }
+  56          
+  57          //延时函数
+  58          void delay (unsigned int n){
+  59   1        unsigned int i;
+  60   1        while (n--){
+  61   2          for (i=0; i<700; i++);
+  62   2        }
+  63   1      }
+  64          
+  65          void main (void) {
+  66   1        char i =0;
+  67   1        WatchDog_Init();
+  68   1        Sysclk_Init();
+  69   1        PortIO_Init();
+  70   1        ZLG7289_Reset ();
+  71   1        ZLG7289_Init (35);
+  72   1        delay (50);
+  73   1        ZLG7289_Reset ();
+  74   1        Timer1_Init();
+  75   1        while (1){
+  76   2        MakeTime ();
+  77   2          for (i=7;i >= 0; i--){
+  78   3            ZLG7289_Download (0, i, 0,Time [i]);
+  79   3            delay (5);
+  80   3          }
+  81   2        }
+  82   1      }
+  83          
+  84          void MakeTime(){
+  85   1        Time[0] =hour / 10;
+  86   1        Time [1] =hour %10;
+  87   1        Time [2]=0x0A;
+  88   1        //显示间隔符
+  89   1        Time [3] =minute / 10;
+  90   1        Time [4] = minute %10;
+  91   1        Time [5] =0x0A;
+  92   1        //显示间隔符
+  93   1        Time [6] = second / 10;
+  94   1        Time [7] = second % 10;
+  95   1      }
+  96          void Timer1_ISR (void) interrupt 3{
+  97   1        TH1 =(65535 - 3700)/256;
+  98   1        TL1 = (65535 -3700)%256;
+  99   1        //重新装载初值
+ 100   1        count --;
+ 101   1        if (count == 0){
+ 102   2        count=50;
+ 103   2        second ++;
+ 104   2          if(second > 59){
+ 105   3            minute++;
+ 106   3            second =0;
+ 107   3              if(minute > 59){
+ 108   4                minute = 0;
+ 109   4                hour++;
+ 110   4                if(hour >23)
+ 111   4                  hour = 0;
+ 112   4              }
+ 113   3          }
+ 114   2        }
+ 115   1      }
+C51 COMPILER V9.59.0.0   DINGSHI                                                           04/08/2022 09:42:01 PAGE 3   
+
+ 116          
+ 117          void INT7_ISR(void) interrupt 19{
+ 118   1        Key = ZLG7289_Key ();
+ 119   1        P3IF &= 0x7E;
+ 120   1        switch (Key){
+ 121   2        case 10:hour++; break ;
+ 122   2        case 11:hour--; break ;
+ 123   2        case 12:minute++; break ;
+ 124   2        case 13:minute--; break ;
+ 125   2        case 14:second++; break ;
+ 126   2        case 15:second--; break ;
+ 127   2        default: break ;
+ 128   2        }
+ 129   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    421    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     13       1
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
