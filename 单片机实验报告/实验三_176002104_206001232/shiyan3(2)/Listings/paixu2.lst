@@ -1,0 +1,77 @@
+C51 COMPILER V9.59.0.0   PAIXU2                                                            04/04/2022 16:05:30 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE PAIXU2
+OBJECT MODULE PLACED IN .\Objects\paixu2.obj
+COMPILER INVOKED BY: D:\Keil_v5\C51\BIN\C51.EXE paixu2.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\pa
+                    -ixu2.lst) TABS(2) OBJECT(.\Objects\paixu2.obj)
+
+line level    source
+
+   1          /*****************************************************************************
+   2          File name: paixu2
+   3          Description: 数据排序
+   4          Author: 熊康
+   5          Version: V1.0
+   6          Date: 2022.3.25
+   7          *****************************************************************************/
+   8          #include "stdio.h"
+   9          #include "intrins.h"
+  10          #include "reg51.h"
+  11          #include "absacc.h"
+  12          #define sum1 DBYTE[0x40] 
+  13          #define sum2 DBYTE[0x41]
+  14          #define sum DBYTE[0x42]
+  15          
+  16          
+  17          unsigned char data ave _at_ 0x50;
+  18          unsigned char data a[10] _at_ 0x30; 
+  19          int i,j,temp;
+  20          
+  21          
+  22          
+  23          
+  24          void main(){
+  25   1        
+  26   1      //数组赋值
+  27   1      for(i=0,j=0x0C;i<10;i++,j--){
+  28   2              a[i]=j;    // 数组从55到45
+  29   2      }
+  30   1        
+  31   1      //冒泡排序
+  32   1      for(i=0; i<10; i++){
+  33   2          for(j=9; j>i; j--){
+  34   3              if(a[j]<a[j-1]){
+  35   4                  temp = a[j];
+  36   4                  a[j] = a[j-1];
+  37   4                  a[j-1] = temp;
+  38   4              }
+  39   3          }
+  40   2      }
+  41   1      
+  42   1      //计算和和平均值
+  43   1      temp = 0;
+  44   1      for(i=1; i<9; i++){
+  45   2          temp = temp + a[i];
+  46   2      }
+  47   1      sum = temp;
+  48   1      sum1 = temp / 10;  //和的十位
+  49   1      sum2 = temp % 10;  //和的各位
+  50   1      ave = (temp*10/ 8+5) / 10;  //平均值
+  51   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+C51 COMPILER V9.59.0.0   PAIXU2                                                            04/04/2022 16:05:30 PAGE 2   
+
+   CODE SIZE        =    244    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      6    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

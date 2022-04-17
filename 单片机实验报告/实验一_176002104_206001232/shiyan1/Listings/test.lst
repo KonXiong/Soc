@@ -1,0 +1,72 @@
+C51 COMPILER V9.59.0.0   TEST                                                              03/19/2022 14:02:59 PAGE 1   
+
+
+C51 COMPILER V9.59.0.0, COMPILATION OF MODULE TEST
+OBJECT MODULE PLACED IN .\Objects\test.obj
+COMPILER INVOKED BY: D:\Keil_v5\C51\BIN\C51.EXE test.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\test
+                    -.lst) TABS(2) OBJECT(.\Objects\test.obj)
+
+line level    source
+
+   1          /*****************************************************************************
+   2          File name: Test
+   3          Description: 熟悉C语言编程
+   4          Author: 熊康
+   5          Version: V1.0
+   6          Date: 2022.3.18
+   7          *****************************************************************************/
+   8          #include "reg51.h"
+   9          #include "stdio.h"
+  10          
+  11          void main(){
+  12   1        int i=0x00;
+  13   1        int a=0x03,b=0x06;
+  14   1        int c=0x00;
+  15   1        float s=0x00;
+  16   1        while(1)
+  17   1        {
+  18   2          //two numbers add
+  19   2          c=a+b;  
+  20   2          TI=1;   //Open Serial
+  21   2          printf("c=%d\n",c);  //print to the Serial
+  22   2          TI=0;  //Close Seiral
+  23   2          P1=c;  //Open Port 1
+  24   2      
+  25   2          //Conpare get the smaller
+  26   2          TI=1;
+  27   2          if(a>b) printf("a>b\n"); 
+  28   2          else printf("a<b\n");
+  29   2          TI=0;
+  30   2      
+  31   2          //add from 1 to 10
+  32   2          c=0;  
+  33   2          for (;i<11;i++) c = c + i;
+  34   2          TI=1;
+  35   2          printf("c=%d\n",c);  
+  36   2          TI=0;
+  37   2          P1=c;
+  38   2      
+  39   2          //get the area of circle 'a'
+  40   2          s=3.14*a*a;
+  41   2          TI=1;
+  42   2          printf("s=%.2f\n",s);
+  43   2          TI=0;
+  44   2          P1=i;
+  45   2        }
+  46   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    239    ----
+   CONSTANT SIZE    =     24    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      12
+C51 COMPILER V9.59.0.0   TEST                                                              03/19/2022 14:02:59 PAGE 2   
+
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
